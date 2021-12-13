@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+  {% block content %}
+    <h1>Reviews for {{ book_title }}</h1>
+     <h2> Average rating: <strong>{{ average_rt }}</strong></h2>
+    {% for rev in reviews %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ rev.author.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ rev.author }}</a>
+              <small class="text-muted">{{ rev.date_posted|date:"F d, Y" }}</small>
+            </div>
+                <h2><a class="article-title" href="{% url 'review-detail' rev.id %}">{{ rev.title }}</a></h2>
+             <p class="rating"><strong>rating: </strong>{{ rev.rating }} </p>
+             <p class="content"><strong>review: </strong> {{ rev.content }} </p>
+          </div>
+        </article>
+        {% endfor %}
+   {% endblock content %}
